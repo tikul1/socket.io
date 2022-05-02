@@ -9,13 +9,13 @@
   </head>
   <body>
     <script>
-      const socket = io("http://localhost:8000");
+      const socket = io("http://localhost:8000/home/");
 
       socket.on("hello", (a) => {
         console.log(a);
       });
     </script>
-      <h1> hey <h1>
+      <h1> { { a } } <h1>
 
   </body>
 </html>

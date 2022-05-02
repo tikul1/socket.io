@@ -1,32 +1,12 @@
 const express = require("express");
-const app = express();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
 const ejs = require("ejs");
-
-app.use(express.text());
+const app = express();
 app.set("view engine", "ejs");
-app.get("/home", (req, res) => {
-  res.render("index");
-});
-
-// app.post("/", async (req, res) => {
-//   try {
-//     let message = req.body;
-//     res.send(message);
-//     console.log(message);
-//   } catch (e) {
-//     res.send("An error occured ");
-//   }
-// });
+app.use("/home", require("./routes/socketRoutes"));
 
 PORT = process.env.PORT || 8000;
-server.listen(PORT, () => console.log(`server running at: ${PORT}`));
+let server = app.listen(PORT, () => console.log(`server running at: ${PORT}`));
+const io = require("socket.io")(server);
+// app.set("io", io);
 
-// io.on("connection", (socket) => {
-//   console.log(socket.id);
-// });
-
-io.on("connection", (socket) => {
-  socket.emit("hello", "world");
-});
+module.exports = { server };
