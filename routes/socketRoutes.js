@@ -5,6 +5,6 @@ const socketController = require("../controller/socketController");
 router.get("/home", socketController.home);
 router.get("/json", socketController.jsonReq);
 
-// router.post("/post", socketController.message);
+router.post("/post", socketController.message);
 
 module.exports = router;
