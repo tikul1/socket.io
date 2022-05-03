@@ -9,11 +9,13 @@
   </head>
   <body>
     <script>
-      const socket = io("http://localhost:8000/home/");
-
-      socket.on("hello", (a) => {
-        console.log(a);
-      });
+      const socket = io();
+      // socket.on("message", (a) => {
+      //   console.log(a);
+      // });
+      socket.on("myJson", (b) => {
+        console.log(JSON.stringify(b));
+      })
     </script>
       <h1> { { a } } <h1>
 

@@ -1,11 +1,19 @@
 const express = require("express");
 const app = express();
-const server = require("../index");
-// const io = require("socket.io")(server);
-const io = require("socket.io");
+const socketHelper = require("../helper/socketHelper");
 
 const home = async (req, res) => {
-  await res.render("index");
+  socketHelper.getIo().emit("message", "hello");
+  await res.send("connected");
+};
+
+const jsonReq = async (req, res) => {
+  let myObj = {
+    name: "hardik",
+    age: 28,
+  };
+  socketHelper.getIo().emit("myJson", myObj);
+  await res.send("connected");
 };
 
 // const message = async (req, res) => {
@@ -18,10 +26,7 @@ const home = async (req, res) => {
 //   }
 // };
 
-io.on("connection", (socket) => {
-  socket.emit("hello", "world");
-});
-
 module.exports = {
   home,
+  jsonReq,
 };
